@@ -1,7 +1,7 @@
-dependency tester
+test-kubeshark
 ---
 
-This is a simple tool to test the dependency graph of a region builder.
+This is a simple tool to test kubeshark.
 
 ### Summary
 
