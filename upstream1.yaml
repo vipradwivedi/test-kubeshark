@@ -1,0 +1,72 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: upstream1
+---
+apiVersion: comcast.github.io/v1
+kind: KuberhealthyCheck
+metadata:
+  name: upstream1
+  namespace: upstream1
+spec:
+  runInterval: 1m
+  timeout: 1m
+  podSpec:
+    containers:
+      - name: service1
+        image: kuberhealthy/http-check:v1.5.0
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: CHECK_URL
+            value: "http://service1.service1.svc.cluster.local"
+          - name: COUNT
+            value: "5"
+          - name: SECONDS
+            value: "1"
+          - name: PASSING_PERCENT
+            value: "80"
+        resources:
+          requests:
+            cpu: 15m
+            memory: 15Mi
+          limits:
+            cpu: 25m
+      - name: service2
+        image: kuberhealthy/http-check:v1.5.0
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: CHECK_URL
+            value: "http://service2.service2.svc.cluster.local"
+          - name: COUNT
+            value: "5"
+          - name: SECONDS
+            value: "1"
+          - name: PASSING_PERCENT
+            value: "80"
+        resources:
+          requests:
+            cpu: 15m
+            memory: 15Mi
+          limits:
+            cpu: 25m
+      - name: service5
+        image: kuberhealthy/http-check:v1.5.0
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: CHECK_URL
+            value: "http://service5.service5.svc.cluster.local"
+          - name: COUNT
+            value: "5"
+          - name: SECONDS
+            value: "1"
+          - name: PASSING_PERCENT
+            value: "80"
+        resources:
+          requests:
+            cpu: 15m
+            memory: 15Mi
+          limits:
+            cpu: 25m
+    restartPolicy: Always
+    terminationGracePeriodSeconds: 5
