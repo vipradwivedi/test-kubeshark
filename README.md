@@ -1,4 +1,4 @@
-region builder dependency tester
+dependency tester
 ---
 
 This is a simple tool to test the dependency graph of a region builder.
