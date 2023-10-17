@@ -1,0 +1,83 @@
+# save it to ~/.kubeshark/config.yaml
+
+tap:
+  docker:
+    registry: docker.io/kubeshark
+    tag: latest
+    imagepullpolicy: Always
+    imagepullsecrets: []
+  proxy:
+    worker:
+      srvport: 8897
+    hub:
+      port: 8898
+      srvport: 8898
+    front:
+      port: 8899
+    host: 0.0.0.0
+  regex: .*
+  namespaces: []
+  release:
+    repo: https://helm.kubeshark.co
+    name: kubeshark
+    namespace: default
+  persistentstorage: false
+  storagelimit: 200Mi
+  storageclass: standard
+  dryrun: false
+  pcap: ""
+  resources:
+    worker:
+      limits:
+        cpu: 750m
+        memory: 1Gi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+    hub:
+      limits:
+        cpu: 750m
+        memory: 1Gi
+      requests:
+        cpu: 50m
+        memory: 50Mi
+  servicemesh: true
+  tls: true
+  packetcapture: libpcap
+  ignoretainted: false
+  labels: {}
+  annotations: {}
+  nodeselectorterms:
+  - matchExpressions:
+    - key: kubernetes.io/os
+      operator: In
+      values:
+      - linux
+  auth:
+    enabled: false
+    approvedemails: []
+    approveddomains: []
+  ingress:
+    enabled: false
+    classname: ""
+    host: ks.svc.cluster.local
+    tls: []
+    annotations: {}
+  ipv6: true
+  debug: false
+  telemetry:
+    enabled: true
+logs:
+  file: ""
+kube:
+  configpath: ""
+  context: ""
+dumplogs: false
+headless: false
+license: ""
+scripting:
+  env:
+    INFLUXDB_URL: "http://influxdb-influxdb2.influxdb:80"
+    INFLUXDB_TOKEN: "lt2nGvtQBeWJqPulp4DewOKn40gqVwNa"
+  source: ""
+  watchscripts: true
